@@ -233,6 +233,10 @@ do_reset:
 // save a0 and a1; arguments from previous boot loader stage:
 //  li x10, 0
 //  li x11, 0
+  csrr a0, mhartid	# from bootrom code
+#ifdef DEVICE_TREE
+  la a1, dtb		# from bootrom code
+#endif /* DEVICE_TREE */
   li x12, 0
   li x13, 0
   li x14, 0
@@ -317,3 +321,9 @@ do_reset:
   .align RISCV_PGSHIFT
 stacks:
   .skip RISCV_PGSIZE * MAX_HARTS
+
+#ifdef DEVICE_TREE
+  .section .rodata
+dtb:
+  .incbin DEVICE_TREE
+#endif

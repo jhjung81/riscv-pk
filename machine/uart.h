@@ -7,14 +7,13 @@
 
 extern volatile uint32_t* uart;
 
-#define UART_REG_TXFIFO		0
-#define UART_REG_RXFIFO		1
-#define UART_REG_TXCTRL		2
-#define UART_REG_RXCTRL		3
-#define UART_REG_DIV		4
+#define UART_RX_FIFO		0
+#define UART_TX_FIFO		1
+#define UART_REG_STAT		2
+#define UART_REG_CTRL		3
 
-#define UART_TXEN		 0x1
-#define UART_RXEN		 0x1
+#define UART_MASK_TX_FULL   0x08
+#define UART_MASK_RX_VALID  0x01
 
 void uart_putchar(uint8_t ch);
 int uart_getchar();
